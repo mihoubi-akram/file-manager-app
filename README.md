@@ -44,6 +44,20 @@ Register an account and start uploading files.
 
 ---
 
+## Architecture
+
+The app is split into two separate projects in a monorepo:
+
+- **Backend** — Laravel 13 REST API. Handles auth, file storage, and business logic. Files are stored in private disk (not publicly accessible) and scoped per user. Authorization is enforced via Laravel Policies. Laravel Sanctum handles session-based SPA authentication.
+
+- **Frontend** — Vue 3 SPA with Pinia for state and Vue Router for navigation. Communicates with the backend via Axios, proxied through Vite in development.
+
+- **Auth** — Sanctum SPA mode (cookie/session, no tokens). CSRF protection is handled automatically by Axios + Sanctum.
+
+- **Database** — MySQL 8.4 via Docker. Files metadata is stored in the DB, Single `user_files` table with UUID primary key
+
+---
+
 ## Commands
 
 ```bash
