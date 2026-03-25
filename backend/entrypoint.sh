@@ -16,8 +16,10 @@ if grep -q "APP_KEY=$" .env; then
     php artisan key:generate --no-interaction
 fi
 
-# Run migrations
-php artisan migrate --no-interaction --force
+# Run migrations only when explicitly requested
+if [ "${RUN_MIGRATIONS}" = "true" ]; then
+    php artisan migrate --no-interaction --force
+fi
 
 # Start Laravel server
 php artisan serve --host=0.0.0.0 --port=8000

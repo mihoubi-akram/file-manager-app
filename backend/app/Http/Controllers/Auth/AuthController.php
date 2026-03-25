@@ -25,6 +25,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         $request->session()->regenerate();
+        $request->session()->regenerateToken();
 
         return response()->json(new UserResource($user), 201);
     }

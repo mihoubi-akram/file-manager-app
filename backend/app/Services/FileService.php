@@ -19,10 +19,7 @@ class FileService
             ->paginate($perPage);
     }
 
-    /**
-     * @param  \Illuminate\Http\UploadedFile[]  $files
-     * @return UserFile[]
-     */
+
     public function store(User $user, array $files): array
     {
         return DB::transaction(function () use ($user, $files) {
@@ -40,7 +37,7 @@ class FileService
                     $stored[] = $path;
 
                     $records[] = $user->userFiles()->create([
-                        'original_name' => $file->getClientOriginalName(),
+                        'original_name' => preg_replace('/[^\w\-.]/', '', basename($file->getClientOriginalName())),
                         'path' => $path,
                         'disk' => config('files.disk'),
                         'mime_type' => $file->getMimeType(),

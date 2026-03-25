@@ -8,7 +8,7 @@ import {
 } from '@/api/files'
 import type { PaginationMeta, UserFile } from '@/types/file'
 
-const PER_PAGE = 10
+const PER_PAGE = 15
 
 export const useFilesStore = defineStore('files', () => {
   const files = ref<UserFile[]>([])
