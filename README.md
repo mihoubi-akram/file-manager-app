@@ -52,7 +52,7 @@ The app is split into two separate projects in a monorepo:
 
 - **Frontend** — Vue 3 SPA with Pinia for state and Vue Router for navigation. Communicates with the backend via Axios, proxied through Vite in development.
 
-- **Auth** — Sanctum SPA mode (cookie/session, no tokens). CSRF protection is handled automatically by Axios + Sanctum.
+- **Auth** — Sanctum SPA mode (cookie/session, no tokens). The app runs on the same domain with no mobile or third-party consumers, so cookies are the right choice HttpOnly, never exposed to JavaScript, and safe from XSS.
 
 - **Database** — MySQL 8.4 via Docker. Files metadata is stored in the DB, Single `user_files` table with UUID primary key
 
